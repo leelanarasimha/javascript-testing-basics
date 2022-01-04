@@ -1,16 +1,19 @@
-const sum = (a, b) => a - b;
-const subtract = (a, b) => a - b;
+const { sum, subtract } = require('./math');
 
 let result = sum(5, 5);
 let expected = 10;
-
-if (result !== expected) {
-  throw new Error(`${result} is not equal to ${expected}`);
-}
+expect(result).toBe(expected);
 
 result = subtract(5, 4);
 expected = 1;
+expect(result).toBe(expected);
 
-if (result !== expected) {
-  throw new Error(`${result} is not equal to ${expected}`);
+function expect(actual) {
+  return {
+    toBe(result) {
+      if (result !== actual) {
+        throw new Error(`${result} is not equal to the ${actual}`);
+      }
+    }
+  };
 }
